@@ -22,9 +22,9 @@ usuarios y contraseñas [aqui](https://github.com/Fradantim/JAVA_SPRING_WS_SECUR
 		}
 
 #### Saludo
-		Endpoint: /hello
-		TIPO: GET
-		Request Header:
-			Content-Type: application/json
-			Authorization: Bearer ${jwt}
-		Response Body: String
+	Endpoint: /hello
+	TIPO: GET
+	Request Header:
+		Content-Type: application/json
+		Authorization: Bearer ${jwt}
+	Response Body: String
