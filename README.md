@@ -48,4 +48,4 @@ usuarios y contraseñas [aqui](https://github.com/Fradantim/JAVA_SPRING_WS_SECUR
 ---
 
 ### Contenido del JWT [(jwt.io)](https://jwt.io/)
-![4](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/4.png)
+![5](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/5.png)
