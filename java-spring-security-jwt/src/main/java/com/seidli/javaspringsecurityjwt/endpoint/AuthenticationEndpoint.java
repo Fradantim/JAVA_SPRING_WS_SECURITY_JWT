@@ -36,7 +36,7 @@ public class AuthenticationEndpoint {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 		} catch (BadCredentialsException e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrectos.");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect user or password.");
 		}
 		
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());

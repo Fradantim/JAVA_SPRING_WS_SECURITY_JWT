@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.seidli.javaspringsecurityjwt.endpoint.message.HelloResponse;
 import com.seidli.javaspringsecurityjwt.persistence.UserService;
 
 @RestController
@@ -15,8 +16,8 @@ public class HelloEndpoint {
 	private UserService userService;
 	
 	@RequestMapping({"/hello"})
-	public String hello(Principal principal) {
-		return "Bienvenido/a "+userService.findByUserName(principal.getName()).getNombreCompleto()+"!";
+	public HelloResponse hello(Principal principal) {
+		return new HelloResponse("Wellcome "+userService.findByUserName(principal.getName()).getCompleteName()+"!");
 	}
 
 }

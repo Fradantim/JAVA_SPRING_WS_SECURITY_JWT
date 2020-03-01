@@ -6,12 +6,12 @@ public class User {
 
 	private String username;
 	private String password;
-	private String nombreCompleto;
+	private String completeName;
 	
-	public User(String username, String password, String nombreCompleto) {
+	public User(String username, String password, String completeName) {
 		this.username = username;
 		this.password = password;
-		this.nombreCompleto = nombreCompleto;
+		this.completeName = completeName;
 	}
 	
 	public User(String username) {
@@ -40,12 +40,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNombreCompleto() {
-		return nombreCompleto;
+	public String getCompleteName() {
+		return completeName;
 	}
 
-	public void setNombreCompleto(String nombreCompleto) {
-		this.nombreCompleto = nombreCompleto;
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
 	}
 
 	@Override

@@ -1,16 +1,18 @@
 # JAVA_SPRING_WS_SECURITY_JWT
-Demo de Spring Web con Spring Security usando JWT para mostrar en la presentacion de Seguridad e Integridad de la Informacion
+Simple proof of concept of an JWT authentication server made with Spring Boot And Spring Security, originally made for the course "Seguridad e Integridad de la Informacion"
 
-La app por default levanta en el puerto 8080
+The app start on port 8080 by default
+
+The simple-html-js-client is, as the name implies, a simple client, but also a little ugly and may not have the best practices on how to create a sessionless web.
 
 
-### Metodos WS
+### WebService Methods
 
 
-usuarios y contraseñas [aqui](https://github.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/blob/master/java-spring-security-jwt/src/main/java/com/seidli/javaspringsecurityjwt/persistence/UserService.java)
+Users and passwords [here](https://github.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/blob/master/java-spring-security-jwt/src/main/java/com/seidli/javaspringsecurityjwt/persistence/UserService.java)
 #### Autenticacion
 	Endpoint: /authenticate
-	TIPO: POST
+	Type: POST
 	Request Body:
 		{
 			"username": String,
@@ -23,29 +25,31 @@ usuarios y contraseñas [aqui](https://github.com/Fradantim/JAVA_SPRING_WS_SECUR
 
 #### Saludo
 	Endpoint: /hello
-	TIPO: GET
-	Requiere estar autenticado
+	Type: GET
+	Requires being authenticated
 	Request Header:
 		Content-Type: application/json
 		Authorization: Bearer ${jwt}
-	Response Body: String
-
+	Response Body: 
+		{
+			"response": String
+		}
 ---
 
-### Ejemplos
+### Examples
 
-#### Autenticacion
+#### Authentication
 ![1](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/1.png)
 ![2](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/2.png)
 
 
 
-#### Saludo
+#### Greeting
 ![3](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/3.png)
 
 
 
 ---
 
-### Contenido del JWT [(jwt.io)](https://jwt.io/)
+### JWT's content [(jwt.io)](https://jwt.io/)
 ![5](https://raw.githubusercontent.com/Fradantim/JAVA_SPRING_WS_SECURITY_JWT/master/img/5.png)

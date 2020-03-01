@@ -21,6 +21,10 @@ import com.seidli.javaspringsecurityjwt.util.JwtUtil;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter{
 	
+	private static final String AUTHORIZATION_HEADER="Authorization";
+	
+	private static final String AUTHORIZATION_KEY="BEARER ";
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
@@ -28,30 +32,33 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 	private JwtUtil jwtUtil;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
-		//analizo el header del request para ver si hay jwt y si es valido
-		final String authorizationHeader = request.getHeader("Authorization");
-		
-		String username = null;
-		String jwt = null;
-		
-		if(authorizationHeader != null && authorizationHeader.toUpperCase().startsWith("BEARER ")) {
-			jwt = authorizationHeader.substring(7);
-			username= jwtUtil.extractUsername(jwt);
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+		//is someone already authenticated?
+		if(SecurityContextHolder.getContext().getAuthentication() == null) {
+			
+			//check if the request has an  authorization header to further check if an 
+			final String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
+			
+			if(authorizationHeader != null && authorizationHeader.toUpperCase().startsWith(AUTHORIZATION_KEY)) {
+				String jwt = authorizationHeader.substring(AUTHORIZATION_KEY.length());
+				String username= jwtUtil.extractUsername(jwt);
+				
+				if (username != null) {
+		            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+		            if (jwtUtil.validateToken(jwt, userDetails)) {
+		            	//check if the token is not expired and if the specified user inside is the same I have in my "database" 
+		                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+		                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+		                //if validations where successful 
+		                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+		                //add a new generated jwt to the response to allow client to keep "authenticated"
+		                response.addHeader("new-jwt", jwtUtil.generateToken(userDetails));
+		            }
+		        }
+			}
 		}
-		
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
-            if (jwtUtil.validateToken(jwt, userDetails)) {
-            	//evaluo que el usuario dentro del token sea el mismo que el que yo tengo en mi "BBDD" y que el token no este vencido 
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            }
-        }
-        filterChain.doFilter(request, response);
+		filterChain.doFilter(request, response);
 	}
 }
