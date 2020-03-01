@@ -10,10 +10,20 @@
 <script src="main.js"></script>
 </head>
 <body>
-	<!--  <input type="text" onkeypress="myFunction()">  -->
 	<div align="center" >
-		
+
 		<br>
+		<div id="currentDateDiv" name="currentDateDiv">
+			<div class="col-sm-4 card">
+				<h4 class="card-title text-center mb-1 mt-1">Current Date</h4>
+				<hr>
+				<ul class="list-group">
+				  	<li class="list-group-item" name="currentDate" id="currentDate"></li>
+			  	</ul>
+			  	<br>
+			</div>
+			<br>
+		</div>
 		
 		<div id="enpointDiv" name="enpointDiv">
 			<div class="col-sm-4 card">
@@ -22,6 +32,43 @@
 				<div class="form-group">
 					<div class="input-group">
 						<input name="endpoint" id="endpoint" class="form-control" placeholder="Endpoint" type="text">
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+		
+		<div id="jwtInfoDiv" name="jwtInfoDiv">
+			<div class="row container">
+				<div class="row">
+					<div class="card col-sm">
+						<article class="card-body">
+				
+							<h4 class="card-title text-center mb-1 mt-1">Last JWT</h4>
+							<hr>
+							
+							<h6 class="card-title text-center mb-1 mt-1">Data</h6>
+							<hr>
+							<p name="lastKWTData" id="lastKWTData" type="text"/>
+							
+							<h6 class="card-title text-center mb-1 mt-1">Text</h6>
+							<hr>
+							<p name="lastKWTText" id="lastKWTText" type="text"/>
+	
+						</article>
+					</div>
+			
+					<div class="card col col-sm">
+						<article class="card-body">
+							<h4 class="card-title text-center mb-1 mt-1">Last JWT</h4>
+							<hr>
+							
+							<ul class="list-group">
+							  	<li class="list-group-item">sub <span name="lastKWTDataSub" id="lastKWTDataSub" class="badge">12</span></li>
+							  	<li class="list-group-item">exp <span name="lastKWTDataExp" id="lastKWTDataExp" class="badge">5</span></li>
+							  	<li class="list-group-item">iat <span name="lastKWTDataIat" id="lastKWTDataIat" class="badge">3</span></li>
+							</ul>
+						</article>
 					</div>
 				</div>
 			</div>
@@ -70,43 +117,6 @@
 					</div>
 	
 				</article>
-			</div>
-			<br>
-		</div>
-		
-		<div id="jwtInfoDiv" name="jwtInfoDiv">
-			<div class="row container">
-				<div class="row">
-					<div class="card col-sm">
-						<article class="card-body">
-				
-							<h4 class="card-title text-center mb-1 mt-1">Last JWT</h4>
-							<hr>
-							
-							<h6 class="card-title text-center mb-1 mt-1">Data</h6>
-							<hr>
-							<p name="lastKWTData" id="lastKWTData" type="text"/>
-							
-							<h6 class="card-title text-center mb-1 mt-1">Text</h6>
-							<hr>
-							<p name="lastKWTText" id="lastKWTText" type="text"/>
-	
-						</article>
-					</div>
-			
-					<div class="card col col-sm">
-						<article class="card-body">
-							<h4 class="card-title text-center mb-1 mt-1">Last JWT</h4>
-							<hr>
-							
-							<ul class="list-group">
-							  	<li class="list-group-item">sub <span name="lastKWTDataSub" id="lastKWTDataSub" class="badge">12</span></li>
-							  	<li class="list-group-item">exp <span name="lastKWTDataExp" id="lastKWTDataExp" class="badge">5</span></li>
-							  	<li class="list-group-item">iat <span name="lastKWTDataIat" id="lastKWTDataIat" class="badge">3</span></li>
-							</ul>
-						</article>
-					</div>
-				</div>
 			</div>
 			<br>
 		</div>

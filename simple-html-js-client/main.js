@@ -12,7 +12,31 @@ window.onload = function wakeUp() {
 	$("#jwtInfoDiv").hide();
 	$("#getRequestDiv").hide();
 
+	theInfiniteLoop();
 	checkJWT();
+}
+
+function theInfiniteLoop(){
+	function loop() {
+		//console.log("In loop.");
+		$('#currentDate').html(new Date());
+		
+		if(lastJWT){
+			var jwt = parseJwt(lastJWT);
+			
+			if(toDateTime(jwt.exp).getTime() < new Date().getTime()){
+				//console.log(toDateTime(jwt.exp).getTime()+" "+new Date().getTime());
+				//console.log(toDateTime(jwt.exp)+" - "+new Date());
+				$("#jwtInfoDiv").addClass("alert alert-danger");
+				$("#JWTexpiredDiv").show();
+				$("#loginDiv").show();
+				$("#getRequestDiv").hide();
+			}
+		}
+
+	}
+
+	setInterval(function(){loop()},1000);//timer running every 1 second
 }
 
 function checkJWT() {
@@ -40,6 +64,7 @@ function checkJWT() {
 		
 		$("#jwtInfoDiv").show();
 		
+		$("#jwtInfoDiv").removeClass("alert alert-danger");
 		$("#jwtInfoDiv").addClass("alert alert-success");
 		
 		setTimeout(() => {
@@ -75,7 +100,7 @@ function changeJWT(jwtText){
 function toDateTime(secs) {
     var t = new Date(1970, 0, 1); // Epoch
     t.setSeconds(secs);
-    t.setTime( t.getTime() - 2*t.getTimezoneOffset()*60*1000 );
+    t.setTime( t.getTime() - t.getTimezoneOffset()*60*1000 );
     //remember kids, work with zulu time from the beginning
     
     return t;
@@ -147,7 +172,7 @@ function sendRequest(){
 			//console.log(" -> jqXHR: " + JSON.stringify(jqXHR));
 			//console.log(" -> jqXHR.header.new-jwt: " + jqXHR.getAllResponseHeaders());
 			console.log(" -> jqXHR.header.new-jwt: " + jqXHR.getResponseHeader("new-jwt"));
-			$.notify(data.response, "success");
+			$.notify("Response: "+data.response, "success");
 			var newjwt = jqXHR.getResponseHeader("new-jwt");
 			if(newjwt){
 				changeJWT(newjwt);
