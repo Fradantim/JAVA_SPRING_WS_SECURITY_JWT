@@ -16,7 +16,7 @@ public class JwtUtil {
 
     private static final String SECRET_KEY = "secret"; //my super secret private key
 
-    private static final Integer DEFAULT_JWT_LIFETIME = 10 * 60; //jwt's lifetime expressed in minutes, currently 10hs
+    private static final Integer DEFAULT_JWT_LIFETIME = 1; //jwt's lifetime expressed in minutes, currently 1 minute
     
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
